@@ -5,7 +5,6 @@ const initialState: MoviesState = {
   movies: [],
 };
 export const loadMovies = createAsyncThunk('movies/loadMovies', () => {
-  /* то, что возвращает thunk -> уходит в case  как action.payload */
   return api.getMovies();
 });
 
