@@ -4,9 +4,12 @@ import MoviesState from './types/MoviesState';
 const initialState: MoviesState = {
   movies: [],
 };
-export const loadMovies = createAsyncThunk('movies/loadMovies', () => {
-  return api.getMovies();
-});
+export const loadMovies = createAsyncThunk(
+  'movies/loadMovies',
+  (page: number) => {
+    return api.getMovies(page);
+  }
+);
 
 const MovieSlice = createSlice({
   name: 'movies',
