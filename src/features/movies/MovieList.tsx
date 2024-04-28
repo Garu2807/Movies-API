@@ -22,6 +22,7 @@ function MovieList(): JSX.Element {
   );
   return (
     <div className="movie_list">
+      <div className="top">Топ 250</div>
       <div className="movies">
         {movies.map((movie) => (
           <MovieItem movie={movie} key={movie.id} />
