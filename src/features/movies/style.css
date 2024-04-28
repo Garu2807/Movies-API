@@ -67,8 +67,10 @@ body {
   color: white;
 }
 .descr {
-  width: 20%;
-  height: 20%;
+  width: 30%;
+  height: 30%;
+  color: white;
+  font-size: xx-large;
 }
 .alternativeName {
   color: white;
@@ -77,6 +79,33 @@ body {
 .main_info h3 {
   color: white;
 }
-.film_info h2 {
+.film_info h1 {
   color: gold;
+}
+.film_info {
+  display: flex;
+  align-items: center;
+}
+.photo img {
+  height: 100vh;
+}
+.main_info {
+  margin-left: 100px;
+}
+.movie_pages {
+  background: linear-gradient(
+    to right,
+    #171717,
+    #000000
+  ); /* Градиент от серого (#808080) до черного (#000000) */
+}
+
+.line_info {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+}
+.line_info h3 {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: x-large;
 }

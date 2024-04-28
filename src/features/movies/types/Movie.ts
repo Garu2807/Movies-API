@@ -8,9 +8,12 @@ export type movie_raiting = {
 export type Genre = {
   name: string;
 };
-export type movie_back = {
+export type back = {
   url: string;
   previewUrl: string;
+};
+export type Countries = {
+  name: string;
 };
 export type Movie = {
   id: number;
@@ -24,6 +27,7 @@ export type Movie = {
   ageRating: number;
   genres: Genre[];
   movieLength: number;
-  back: movie_back;
+  backdrop: back;
+  countries: Countries[];
 };
 export type MovieId = Movie['id'];
