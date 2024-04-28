@@ -66,3 +66,17 @@ body {
 .top {
   color: white;
 }
+.descr {
+  width: 20%;
+  height: 20%;
+}
+.alternativeName {
+  color: white;
+  font-size: large;
+}
+.main_info h3 {
+  color: white;
+}
+.film_info h2 {
+  color: gold;
+}
