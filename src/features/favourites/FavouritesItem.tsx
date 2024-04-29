@@ -1,17 +1,13 @@
-import { Movie } from './types/Movie';
+import { Movie } from '../movies/types/Movie';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../store';
-import { addToFavorites } from '../favourites/FavouritesSlice';
 export type MovieProps = {
   movie: Movie;
 };
 
-function MovieItem({ movie }: MovieProps): JSX.Element {
+function FavouritesItem({ movie }: MovieProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const handleAddToFavourites = (movie: Movie): void => {
-    dispatch(addToFavorites(movie));
-  };
   const navigate = useNavigate();
   const handleClick = (): void => {
     navigate(`/${movie.id}`);
@@ -27,14 +23,8 @@ function MovieItem({ movie }: MovieProps): JSX.Element {
         <p className="name">{movie.name}</p>
       </div>
       <p className="rating">{movie.rating.imdb}</p>
-      <button
-        className="addToCart"
-        onClick={() => handleAddToFavourites(movie)}
-      >
-        Добавить в избранное
-      </button>
     </div>
   );
 }
 
-export default MovieItem;
+export default FavouritesItem;
