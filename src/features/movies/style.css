@@ -67,10 +67,11 @@ body {
   color: white;
 }
 .descr {
-  width: 30%;
+  width: 500px;
   height: 30%;
   color: white;
   font-size: xx-large;
+  text-align: left;
 }
 .alternativeName {
   color: white;
@@ -103,7 +104,7 @@ body {
 .line_info {
   display: flex;
   justify-content: space-between;
-  width: 400px;
+  width: 500px;
 }
 .line_info h3 {
   color: rgba(255, 255, 255, 0.5);

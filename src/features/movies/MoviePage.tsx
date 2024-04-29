@@ -28,17 +28,12 @@ function MoviePage(): JSX.Element {
 
       <div className="main_info">
         <h1 className="movie_name">{`${oneMovie.name} (${oneMovie.alternativeName})`}</h1>
-        {/* {
-          <h3>
-            {` ${oneMovie.rating.imdb} ${oneMovie.year}  ${oneMovie.genres.map((el) => el.name)} ${oneMovie.countries.map((el) => el.name)} ${oneMovie.movieLength} мин   ${oneMovie.ageRating}+`}
-          </h3>
-        } */}
         <div className="line_info">
           <h3 className="movie_imdb">{oneMovie.rating.imdb}</h3>
           <h3>{oneMovie.year}</h3>
           <h3>{`${oneMovie.genres.map((el) => el.name)[0]}`}</h3>
           <h3>{oneMovie.countries.map((el) => el.name)[0]}</h3>
-          <h3>{`${oneMovie.movieLength}мин`}</h3>
+          <h3>{`${oneMovie.movieLength} мин`}</h3>
           <h3>{`${oneMovie.ageRating}+`}</h3>
         </div>
         <p
