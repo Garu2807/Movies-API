@@ -31,7 +31,7 @@ function FavouritesItem({ movie }: MovieProps): JSX.Element {
       </div>
       <p className="rating">{movie.rating.imdb}</p>
       <button
-        className="addToCart"
+        className="removeToFavourites"
         onClick={() => handleRemoveToFavourites(movie)}
       >
         Удалить из избранного

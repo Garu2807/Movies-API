@@ -29,7 +29,7 @@ function MovieItem({ movie }: MovieProps): JSX.Element {
       </div>
       <p className="rating">{movie.rating.imdb}</p>
       <button
-        className="addToCart"
+        className="addToFavourites"
         onClick={() => handleAddToFavourites(movie)}
       >
         Добавить в избранное
