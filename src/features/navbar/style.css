@@ -1,0 +1,8 @@
+.links {
+  display: flex;
+  justify-content: space-around;
+  font-size: x-large;
+}
+.navbar {
+  text-align: center;
+}

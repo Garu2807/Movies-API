@@ -1,0 +1,119 @@
+.movie_list {
+  /* padding-top: 10%; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie_item {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: left;
+  height: 750px;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.movie_item:hover {
+  transform: scale(1.05);
+}
+.movie_img {
+  width: 500px;
+}
+body {
+  background-color: #171717;
+}
+.movie_info {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+.rating {
+  position: relative;
+  margin-top: -22%;
+  width: 10%;
+  bottom: 93%;
+  left: 5%;
+  background-color: green;
+  text-align: center;
+  font-size: x-large;
+  color: white;
+  border-radius: 10px;
+}
+.name {
+  padding-bottom: 0px;
+  font-size: x-large;
+}
+.pages {
+  display: flex;
+  margin-top: 100px;
+  /* justify-content: space-between; */
+}
+.page_btn {
+  height: 40px;
+  width: 40px;
+  margin-left: 20px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+.page_btn:hover {
+  background-color: gold;
+}
+.movies {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.top {
+  color: white;
+}
+.descr {
+  width: 500px;
+  height: 30%;
+  color: white;
+  font-size: xx-large;
+  text-align: left;
+}
+.alternativeName {
+  color: white;
+  font-size: large;
+}
+.main_info h3 {
+  color: white;
+}
+.film_info h1 {
+  color: gold;
+}
+.film_info {
+  display: flex;
+  align-items: center;
+}
+.photo img {
+  height: 100vh;
+}
+.main_info {
+  margin-left: 100px;
+}
+.movie_pages {
+  background: linear-gradient(
+    to right,
+    #171717,
+    #000000
+  ); /* Градиент от серого (#808080) до черного (#000000) */
+}
+
+.line_info {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+}
+.line_info h3 {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: x-large;
+}
+.removeToFavourites {
+  width: 100px;
+  border-radius: 20px;
+  background-color: red;
+  position: relative;
+  left: 396px;
+}
