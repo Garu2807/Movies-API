@@ -1,21 +1,23 @@
-import { Movie } from './types/Movie';
+import { Movie } from '../movies/types/Movie';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../store';
-import { addToFavorites } from '../favourites/FavouritesSlice';
+import { removeFromFavorites } from './FavouritesSlice';
 export type MovieProps = {
   movie: Movie;
 };
 
-function MovieItem({ movie }: MovieProps): JSX.Element {
+function FavouritesItem({ movie }: MovieProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const handleAddToFavourites = (movie: Movie): void => {
-    dispatch(addToFavorites(movie));
+
+  const handleRemoveToFavourites = (movie: Movie): void => {
+    dispatch(removeFromFavorites(movie));
   };
   const navigate = useNavigate();
   const handleClick = (): void => {
-    navigate(`/${movie.id}`);
+    navigate(`/favourites/${movie.id}`);
   };
+
   return (
     <div className="movie_item">
       <div className="movie_info">
@@ -29,13 +31,13 @@ function MovieItem({ movie }: MovieProps): JSX.Element {
       </div>
       <p className="rating">{movie.rating.imdb}</p>
       <button
-        className="addToFavourites"
-        onClick={() => handleAddToFavourites(movie)}
+        className="removeToFavourites"
+        onClick={() => handleRemoveToFavourites(movie)}
       >
-        Добавить в избранное
+        Удалить из избранного
       </button>
     </div>
   );
 }
 
-export default MovieItem;
+export default FavouritesItem;

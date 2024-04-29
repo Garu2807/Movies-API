@@ -15,7 +15,7 @@ export type back = {
 export type Countries = {
   name: string;
 };
-export type Movie = {
+export type Favourites = {
   id: number;
   name: string;
   aleternativeName: string;
@@ -30,4 +30,4 @@ export type Movie = {
   backdrop: back;
   countries: Countries[];
 };
-export type MovieId = Movie['id'];
+export type MovieId = Favourites['id'];

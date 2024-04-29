@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import moviesReducer from './features/movies/MovieSlice';
+import favouritesReducer from './features/favourites/FavouritesSlice';
 const store = configureStore({
-  reducer: { movies: moviesReducer },
+  reducer: { movies: moviesReducer, favourites: favouritesReducer },
 });
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch: () => AppDispatch = useDispatch;
