@@ -17,9 +17,10 @@ function MovieItem({ movie }: MovieProps): JSX.Element {
     navigate(`/${movie.id}`);
   };
   return (
-    <div className="movie_item" onClick={handleClick}>
+    <div className="movie_item">
       <div className="movie_info">
         <img
+          onClick={handleClick}
           className="movie_img"
           src={movie.poster.previewUrl}
           alt={movie.name}

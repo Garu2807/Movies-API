@@ -1,12 +1,21 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { RootState } from '../../store';
+import { RootState, useAppDispatch } from '../../store';
+import { loadMovies } from './MovieSlice';
 
 function MoviePage(): JSX.Element {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 10;
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(loadMovies(currentPage));
+  }, [currentPage]);
+
   const navigate = useNavigate();
   const { movies } = useSelector((store: RootState) => store.movies);
   const { id } = useParams();
+
   const oneMovie = movies.find((movie) => movie.id === Number(id));
   const handleBackClick = (): void => {
     navigate(-1);

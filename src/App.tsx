@@ -14,6 +14,7 @@ function App(): JSX.Element {
         <Route path="/" element={<MovieList />} />
         <Route path="/:id" element={<MoviePage />} />
         <Route path="/favourites" element={<FavoriteMovies />} />
+        <Route path="/favourites/:id" element={<MoviePage />} />
       </Routes>
     </>
   );
