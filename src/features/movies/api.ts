@@ -1,6 +1,6 @@
 import { Movie } from './types/Movie';
 
-const apiKey = 'GWRPQDY-EW8437K-MEWDFVW-KCAH7G2';
+const apiKey = 'M4XR0MZ-20W4K5Q-NTSS050-QB7DC15';
 const baseUrl = 'https://api.kinopoisk.dev';
 
 export const getMovies = async (page: number = 1): Promise<Movie[]> => {
