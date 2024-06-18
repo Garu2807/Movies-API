@@ -1,7 +1,11 @@
 import { Movie } from './types/Movie';
 
-const apiKey = 'M4XR0MZ-20W4K5Q-NTSS050-QB7DC15';
+const apiKey = process.env.REACT_APP_API_KEY;
 const baseUrl = 'https://api.kinopoisk.dev';
+
+if (!apiKey) {
+  throw new Error('API key is missing');
+}
 
 export const getMovies = async (page: number = 1): Promise<Movie[]> => {
   const response = await fetch(
@@ -17,6 +21,7 @@ export const getMovies = async (page: number = 1): Promise<Movie[]> => {
   console.log(data.docs);
   return data.docs;
 };
+
 export const getMovieById = async (id: number): Promise<Movie | null> => {
   const response = await fetch(`${baseUrl}/v1.4/movie/${id}`, {
     headers: {
