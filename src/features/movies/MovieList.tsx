@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store';
 import MovieItem from './MovieItem';
-import { loadMovies, loadMoviesByGenre } from './MovieSlice';
+import { loadMovies, loadFilteredMovies } from './MovieSlice';
 import usePagination from '../hooks/UsePagination';
 import './style.css';
 
@@ -11,6 +11,7 @@ function MovieList(): JSX.Element {
   const totalPages = 10;
   const dispatch = useAppDispatch();
   const [selectedGenre, setSelectedGenre] = useState<string>('');
+  const [rating, setRating] = useState<number>(0);
 
   const {
     currentPage,
@@ -21,21 +22,18 @@ function MovieList(): JSX.Element {
   } = usePagination({ totalPages });
 
   useEffect(() => {
-    if (selectedGenre) {
-      dispatch(
-        loadMoviesByGenre({
-          page: currentPage,
-          genres: { name: selectedGenre },
-        })
-      );
-    } else {
-      dispatch(loadMovies(currentPage));
-    }
-  }, [currentPage, selectedGenre, dispatch]);
+    const genre = selectedGenre ? { name: selectedGenre } : { name: '' };
+    dispatch(loadFilteredMovies({ page: currentPage, genres: genre, rating }));
+  }, [currentPage, selectedGenre, rating, dispatch]);
 
   const handleGenreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedGenre(event.target.value);
-    handleFirstPage(); // Вернемся на первую страницу при изменении жанра
+    handleFirstPage(); // Вернемся на первую страницу при изменении фильтрации
+  };
+
+  const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRating(Number(event.target.value));
+    handleFirstPage();
   };
 
   return (
@@ -76,11 +74,26 @@ function MovieList(): JSX.Element {
           <option value="мелодрама">Мелодрама</option>
           {/* Добавьте другие жанры по мере необходимости */}
         </select>
+        <div className="rating-filters">
+          <label htmlFor="rating">Рейтинг:</label>
+          <input
+            type="range"
+            id="rating"
+            min="0"
+            max="10"
+            step="0.1"
+            value={rating}
+            onChange={handleRatingChange}
+          />
+          <span>{rating}</span>
+        </div>
       </div>
       <div className="movies">
-        {movies.map((movie) => (
-          <MovieItem movie={movie} key={movie.id} />
-        ))}
+        {Array.isArray(movies) && movies.length > 0 ? (
+          movies.map((movie) => <MovieItem movie={movie} key={movie.id} />)
+        ) : (
+          <div>No movies found</div>
+        )}
       </div>
     </div>
   );

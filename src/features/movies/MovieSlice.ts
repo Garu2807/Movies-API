@@ -21,12 +21,13 @@ export const loadMovies = createAsyncThunk(
 type LoadMoviesByArgs = {
   page: number;
   genres: Genre;
+  rating: number;
 };
 
-export const loadMoviesByGenre = createAsyncThunk(
-  'movies/loadMoviesByGenre',
-  async ({ page, genres }: LoadMoviesByArgs) => {
-    const movies = await api.getMoviesByGenre(page, genres);
+export const loadFilteredMovies = createAsyncThunk(
+  'movies/loadFilteredMovies',
+  async ({ page, genres, rating }: LoadMoviesByArgs) => {
+    const movies = await api.getFilteredMovies(page, genres, rating);
     return movies;
   }
 );
@@ -41,13 +42,13 @@ const moviesSlice = createSlice({
         state.movies = action.payload;
       })
       .addCase(loadMovies.rejected, (state, action) => {
-        console.log(action.error);
+        console.log(action.error.message);
       })
-      .addCase(loadMoviesByGenre.fulfilled, (state, action) => {
+      .addCase(loadFilteredMovies.fulfilled, (state, action) => {
         state.movies = action.payload;
       })
-      .addCase(loadMoviesByGenre.rejected, (state, action) => {
-        console.log(action.error);
+      .addCase(loadFilteredMovies.rejected, (state, action) => {
+        console.log(action.error.message);
       });
   },
 });
