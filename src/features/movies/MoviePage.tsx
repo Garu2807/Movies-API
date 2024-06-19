@@ -7,6 +7,9 @@ import { loadMovies } from './MovieSlice';
 function MoviePage(): JSX.Element {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 10;
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(loadMovies(currentPage));

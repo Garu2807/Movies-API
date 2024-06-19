@@ -11,6 +11,7 @@
   border-radius: 10px;
   text-align: left;
   height: 750px;
+  margin-top: 100px;
   transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .movie_item:hover {
@@ -50,7 +51,7 @@ body {
 }
 .page_btn {
   height: 40px;
-  width: 40px;
+  width: 100px;
   margin-left: 20px;
   border-radius: 10px;
   transition: background-color 0.3s ease;
@@ -62,6 +63,7 @@ body {
   display: flex;
   justify-content: space-around;
   width: 100%;
+  flex-wrap: wrap;
 }
 .top {
   color: white;
