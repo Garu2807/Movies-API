@@ -18,6 +18,7 @@ export const loadMovies = createAsyncThunk(
   }
 );
 
+
 type LoadMoviesByArgs = {
   page: number;
   genres: Genre;
@@ -31,6 +32,7 @@ export const loadFilteredMovies = createAsyncThunk(
     return movies;
   }
 );
+
 
 const moviesSlice = createSlice({
   name: 'movies',

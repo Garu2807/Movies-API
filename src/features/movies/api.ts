@@ -56,9 +56,6 @@ export const getFilteredMovies = async (
   if (genres.name) {
     url += `&genres.name=${genres.name}`;
   }
-  if (rating > 0) {
-    url += `&rating.imdb=${rating}`;
-  }
 
   console.log('Request URL:', url);
 
@@ -79,6 +76,7 @@ export const getFilteredMovies = async (
 
   const data = await response.json();
   console.log('getFilteredMovies response:', data);
+
   return data.docs;
 };
 /////
