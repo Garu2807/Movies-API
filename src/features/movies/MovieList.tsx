@@ -4,14 +4,20 @@ import { RootState, useAppDispatch } from '../../store';
 import MovieItem from './MovieItem';
 import { loadMovies, loadFilteredMovies } from './MovieSlice';
 import usePagination from '../hooks/UsePagination';
+import { Range, getTrackBackground } from 'react-range';
 import './style.css';
+import { Movie } from './types/Movie';
+
+const MIN = 0;
+const MAX = 10;
 
 function MovieList(): JSX.Element {
   const { movies } = useSelector((store: RootState) => store.movies);
   const totalPages = 10;
   const dispatch = useAppDispatch();
   const [selectedGenre, setSelectedGenre] = useState<string>('');
-  const [rating, setRating] = useState<number>(0);
+  const [ratingRange, setRatingRange] = useState<number[]>([MIN, MAX]);
+  const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
 
   const {
     currentPage,
@@ -23,16 +29,26 @@ function MovieList(): JSX.Element {
 
   useEffect(() => {
     const genre = selectedGenre ? { name: selectedGenre } : { name: '' };
-    dispatch(loadFilteredMovies({ page: currentPage, genres: genre, rating }));
-  }, [currentPage, selectedGenre, rating, dispatch]);
+    dispatch(
+      loadFilteredMovies({ page: currentPage, genres: genre, rating: 0 })
+    );
+  }, [currentPage, selectedGenre, dispatch]);
+
+  useEffect(() => {
+    const filtered = movies.filter((movie) => {
+      const imdbRating = parseFloat(movie.rating.imdb);
+      return imdbRating >= ratingRange[0] && imdbRating <= ratingRange[1];
+    });
+    setFilteredMovies(filtered);
+  }, [movies, ratingRange]);
 
   const handleGenreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedGenre(event.target.value);
     handleFirstPage(); // Вернемся на первую страницу при изменении фильтрации
   };
 
-  const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRating(Number(event.target.value));
+  const handleRatingChange = (values: number[]) => {
+    setRatingRange(values);
     handleFirstPage();
   };
 
@@ -65,32 +81,66 @@ function MovieList(): JSX.Element {
         </button>
       </div>
       <div className="filters">
-        <label htmlFor="genre">Фильтровать по жанрам:</label>
-        <select id="genre" value={selectedGenre} onChange={handleGenreChange}>
-          <option value="">Все жанры</option>
-          <option value="ужасы">Ужасы</option>
-          <option value="драма">Драма</option>
-          <option value="комедия">Комедия</option>
-          <option value="мелодрама">Мелодрама</option>
-          {/* Добавьте другие жанры по мере необходимости */}
-        </select>
-        <div className="rating-filters">
-          <label htmlFor="rating">Рейтинг:</label>
-          <input
-            type="range"
-            id="rating"
-            min="0"
-            max="10"
-            step="0.1"
-            value={rating}
+        <div className="genre_filter">
+          <label htmlFor="genre">Фильтровать по жанрам:</label>
+          <select id="genre" value={selectedGenre} onChange={handleGenreChange}>
+            <option value="">Все жанры</option>
+            <option value="ужасы">Ужасы</option>
+            <option value="драма">Драма</option>
+            <option value="комедия">Комедия</option>
+            <option value="мелодрама">Мелодрама</option>
+          </select>
+        </div>
+        <div className="rating_filter">
+          <label htmlFor="ratingRange">Диапазон рейтингов:</label>
+          <Range
+            values={ratingRange}
+            step={0.4}
+            min={MIN}
+            max={MAX}
             onChange={handleRatingChange}
+            renderTrack={({ props, children }) => (
+              <div
+                {...props}
+                style={{
+                  ...props.style,
+                  height: '6px',
+                  width: '100%',
+                  background: getTrackBackground({
+                    values: ratingRange,
+                    colors: ['#ccc', '#548BF4', '#ccc'],
+                    min: MIN,
+                    max: MAX,
+                  }),
+                }}
+              >
+                {children}
+              </div>
+            )}
+            renderThumb={({ props }) => (
+              <div
+                {...props}
+                style={{
+                  ...props.style,
+                  height: '20px',
+                  width: '20px',
+                  backgroundColor: '#548BF4',
+                }}
+              />
+            )}
           />
-          <span>{rating}</span>
+          <div className="range-labels">
+            <span>{ratingRange[0]}</span>
+            <span>{ratingRange[1]}</span>
+          </div>
         </div>
       </div>
+
       <div className="movies">
-        {Array.isArray(movies) && movies.length > 0 ? (
-          movies.map((movie) => <MovieItem movie={movie} key={movie.id} />)
+        {Array.isArray(filteredMovies) && filteredMovies.length > 0 ? (
+          filteredMovies.map((movie) => (
+            <MovieItem movie={movie} key={movie.id} />
+          ))
         ) : (
           <div>No movies found</div>
         )}
